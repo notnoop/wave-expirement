@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Module>
+  <ModulePrefs title="Hello Wave" height="500" width="600">
+    <Require feature="wave" /> 
+	<Require feature="dynamic-height" />
+
+  	</ModulePrefs>
+  <Content type="html">
+    <![CDATA[
+	<!DOCTYPE html "-//W3C//DTD XHTML 1.0 Strict//EN" 
+	  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml">
+
+	  <head>
+	    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+
+	    <title>Google Book Search Embedded Viewer API Example</title>
+	    <script type="text/javascript" src="http://www.google.com/jsapi"></script>
+	    <script type="text/javascript">
+	      google.load("books", "0");
+
+		  function stateUpdated() {
+	        var viewer = new google.books.DefaultViewer(document.getElementById('viewerCanvas'));
+			var query = wave.getState().get('query', 'ISBN:0596510047').toUpperCase();
+			wave.log("The query is: " + query);
+	        viewer.load(query);
+			gadget.window.adjustHeight();		
+		}
+	      function initialize() {
+			wave.setStateCallback(stateUpdated);
+	      }
+
+	      google.setOnLoadCallback(initialize);
+	    </script>
+	  </head>
+
+	  <body>
+	    <div id="viewerCanvas" style="width: 600px; height: 500px"></div>
+	  </body>
+	</html>
+    ]]>
+  </Content>
+</Module>
